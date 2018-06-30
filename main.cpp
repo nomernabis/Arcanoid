@@ -13,9 +13,15 @@ int main() {
     menuList.setBackgroundColor(sf::Color::Black);
     menuList.setChildSpacing(20);
     menuList.setPadding(100, 0);
-    menuList.add("START");
-    menuList.add("OPTIONS");
-    menuList.add("EXIT");
+    menuList.add("START", [](){
+        std::cout << "START\n";
+    });
+    menuList.add("OPTIONS", [](){
+        std::cout << "OPTIONS\n";
+    });
+    menuList.add("EXIT", [](){
+        std::cout << "EXIT\n";
+    });
 
 
     TextNode textNode;
