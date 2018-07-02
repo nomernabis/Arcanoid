@@ -21,10 +21,21 @@ Game::~Game() {
     }
 }
 
+void Game::update() {
+    curState->update();
+}
+
 void Game::run() {
+    float elapsedTime = 0;
+    const float TIME_PER_FRAME = 1 / 60;
     while(window.isOpen()){
-        handleInput();
+        if(elapsedTime > TIME_PER_FRAME){
+            elapsedTime = 0;
+            handleInput();
+            update();
+        }
         draw();
+        elapsedTime += clock.restart().asMilliseconds();
     }
 }
 
@@ -41,6 +52,7 @@ void Game::handleInput() {
 void Game::draw() {
     curState->draw();
 }
+
 
 void Game::changeState(Game::States stateId) {
     State* temp = curState;

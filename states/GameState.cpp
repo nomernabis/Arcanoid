@@ -4,17 +4,19 @@
 
 #include "GameState.h"
 
-GameState::GameState(Game* game): State(game) {
-    rect.setSize({200, 200});
-    rect.setFillColor(sf::Color::Green);
+GameState::GameState(Game* game): State(game), paddle(game->getWindow()) {
 }
 
 void GameState::handleInput(sf::Event &event) {
+    paddle.handleInput(event);
+}
 
+void GameState::update() {
+    paddle.update();
 }
 
 void GameState::draw() {
     getWindow()->clear(sf::Color::White);
-    getWindow()->draw(rect);
+    getWindow()->draw(paddle);
     getWindow()->display();
 }

@@ -16,6 +16,7 @@ class State {
 public:
     State(Game* game);
     virtual void handleInput(sf::Event& event){};
+    virtual void update(){};
     virtual void draw(){};
 
     sf::RenderWindow* getWindow();

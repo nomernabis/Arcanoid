@@ -8,12 +8,14 @@
 
 #include <SFML/Graphics/RectangleShape.hpp>
 #include "State.h"
+#include "../game/Paddle.h"
 
 class GameState : public State{
-    sf::RectangleShape rect;
+    Paddle paddle;
 public:
     GameState(Game* game);
     virtual void handleInput(sf::Event& event);
+    virtual void update();
     virtual void draw();
 };
 

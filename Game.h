@@ -14,7 +14,9 @@ class Game {
     const int SCREEN_HEGIHT = 800;
     sf::RenderWindow window;
     State* curState = nullptr;
+    sf::Clock clock;
     void handleInput();
+    void update();
     void draw();
 public:
     enum class States{
