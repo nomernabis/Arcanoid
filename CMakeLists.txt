@@ -9,7 +9,7 @@ include_directories(${UI_INCLUDE_DIR})
 
 
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES main.cpp Game.cpp Game.h states/State.cpp states/State.h states/MenuState.cpp states/MenuState.h states/GameState.cpp states/GameState.h)
 add_executable(Arcanoid ${SOURCE_FILES})
 
 target_link_libraries(Arcanoid ui)
