@@ -6,6 +6,7 @@
 
 GameState::GameState(Game* game): State(game), paddle(game->getWindow()),
                                   ball(game->getWindow()) {
+    brick = new Brick(getWindow(), 0, 0);
 }
 
 void GameState::handleInput(sf::Event &event) {
@@ -21,5 +22,6 @@ void GameState::draw() {
     getWindow()->clear(sf::Color::White);
     getWindow()->draw(paddle);
     getWindow()->draw(ball);
+    getWindow()->draw(*brick);
     getWindow()->display();
 }

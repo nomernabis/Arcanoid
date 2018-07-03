@@ -10,10 +10,12 @@
 #include "State.h"
 #include "../game/Paddle.h"
 #include "../game/Ball.h"
+#include "../game/Brick.h"
 
 class GameState : public State{
     Paddle paddle;
     Ball ball;
+    Brick* brick;
 public:
     GameState(Game* game);
     virtual void handleInput(sf::Event& event);

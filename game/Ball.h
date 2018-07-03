@@ -12,8 +12,8 @@
 #include "Paddle.h"
 
 class Ball: public sf::Drawable {
-    const float WIDTH = 30;
-    const float HEIGHT = 30;
+    const float WIDTH = 15;
+    const float HEIGHT = 15;
     float dx = 5, dy = -5;
     sf::RectangleShape rect;
     sf::RenderWindow* window;
