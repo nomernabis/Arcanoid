@@ -3,6 +3,7 @@
 //
 
 #include <SFML/Window/Event.hpp>
+#include <iostream>
 #include "Game.h"
 #include "states/MenuState.h"
 #include "states/GameState.h"
@@ -27,15 +28,16 @@ void Game::update() {
 
 void Game::run() {
     float elapsedTime = 0;
-    const float TIME_PER_FRAME = 1 / 60;
+    const float TIME_PER_FRAME = 1.f / 60;
     while(window.isOpen()){
+        handleInput();
+        std::cout << elapsedTime << ", " << TIME_PER_FRAME << "\n";
         if(elapsedTime > TIME_PER_FRAME){
             elapsedTime = 0;
-            handleInput();
             update();
         }
         draw();
-        elapsedTime += clock.restart().asMilliseconds();
+        elapsedTime += clock.restart().asSeconds();
     }
 }
 

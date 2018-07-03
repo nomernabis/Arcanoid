@@ -9,9 +9,11 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include "State.h"
 #include "../game/Paddle.h"
+#include "../game/Ball.h"
 
 class GameState : public State{
     Paddle paddle;
+    Ball ball;
 public:
     GameState(Game* game);
     virtual void handleInput(sf::Event& event);

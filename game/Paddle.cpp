@@ -32,18 +32,19 @@ void Paddle::handleInput(sf::Event& event) {
 }
 
 void Paddle::update() {
-    if(isInBounds()){
+    float toX = rect.getPosition().x + dx;
+    if(isInBounds(toX)){
         rect.move(dx, 0);
     } else {
         if(rect.getPosition().x < 0){
             rect.setPosition({0, rect.getPosition().y});
         }
         if(rect.getPosition().x + rect.getSize().x > window->getSize().x){
-            rect.setPosition({window->getSize().x - rect.getSize().x, 0});
+            rect.setPosition({window->getSize().x - rect.getSize().x, rect.getPosition().y});
         }
     }
 }
 
-bool Paddle::isInBounds() {
-    return rect.getPosition().x >= 0 && rect.getPosition().x + rect.getSize().x <= window->getSize().x;
+bool Paddle::isInBounds(float x) {
+    return x >= 0 && x + rect.getSize().x <= window->getSize().x;
 }

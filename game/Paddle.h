@@ -13,8 +13,8 @@ class Paddle: public sf::Drawable {
     sf::RectangleShape rect;
     sf::RenderWindow* window;
     float dx = 0;
-    float speed = 1;
-    bool isInBounds();
+    float speed = 15;
+    bool isInBounds(float x);
 public:
     const float WIDTH = 150;
     const float HEIGHT = 50;
