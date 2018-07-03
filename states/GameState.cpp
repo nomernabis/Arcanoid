@@ -13,8 +13,8 @@ void GameState::handleInput(sf::Event &event) {
 }
 
 void GameState::update() {
-    ball.update();
     paddle.update();
+    ball.update(paddle);
 }
 
 void GameState::draw() {

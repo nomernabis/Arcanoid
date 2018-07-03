@@ -22,6 +22,7 @@ public:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
     void handleInput(sf::Event&);
     void update();
+    sf::RectangleShape getRect() const;
 };
 
 

@@ -9,6 +9,7 @@
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include "Paddle.h"
 
 class Ball: public sf::Drawable {
     const float WIDTH = 30;
@@ -19,7 +20,7 @@ class Ball: public sf::Drawable {
 public:
     Ball(sf::RenderWindow* window);
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-    void update();
+    void update(const Paddle& paddle);
     bool isXInBounds(float x);
     bool isYInBounds(float y);
 };

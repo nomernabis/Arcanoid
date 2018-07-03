@@ -13,6 +13,10 @@ Paddle::Paddle(sf::RenderWindow* window) {
     rect.setPosition(0, window->getSize().y - rect.getSize().y - 10);
 }
 
+sf::RectangleShape Paddle::getRect() const{
+    return rect;
+}
+
 void Paddle::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     target.draw(rect, states);
 }

@@ -16,16 +16,21 @@ void Ball::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     target.draw(rect, states);
 }
 
-void Ball::update() {
+void Ball::update(const Paddle& paddle) {
     float toX = rect.getPosition().x + dx;
     float toY = rect.getPosition().y + dy;
+
+    sf::FloatRect toBounds = rect.getGlobalBounds();
+    toBounds.left = toX;
+    toBounds.top = toY;
 
     if(!isXInBounds(toX)){
         dx = -dx;
     }
-    if(!isYInBounds(toY)){
+    if(!isYInBounds(toY) || paddle.getRect().getGlobalBounds().intersects(toBounds)){
         dy = -dy;
     }
+
     rect.move(dx, dy);
 }
 
