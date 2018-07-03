@@ -58,7 +58,7 @@ void Game::draw() {
 void Game::changeState(Game::States stateId) {
     State* temp = curState;
     switch (stateId){
-        case States ::GAME_STATE:
+        case States::GAME_STATE:
             curState = new GameState(this);
             delete temp;
             break;

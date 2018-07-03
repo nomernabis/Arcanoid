@@ -15,7 +15,7 @@
 class GameState : public State{
     Paddle paddle;
     Ball ball;
-    Brick* brick;
+    std::vector<Brick*> bricks;
 public:
     GameState(Game* game);
     virtual void handleInput(sf::Event& event);

@@ -6,7 +6,10 @@
 
 GameState::GameState(Game* game): State(game), paddle(game->getWindow()),
                                   ball(game->getWindow()) {
-    brick = new Brick(getWindow(), 0, 0);
+   for(int i=0; i < 5; ++i){
+       Brick* brick = new Brick(getWindow(), 10 + i * 120, 10);
+       bricks.push_back(brick);
+   }
 }
 
 void GameState::handleInput(sf::Event &event) {
@@ -22,6 +25,8 @@ void GameState::draw() {
     getWindow()->clear(sf::Color::White);
     getWindow()->draw(paddle);
     getWindow()->draw(ball);
-    getWindow()->draw(*brick);
+    for(Brick* brick:bricks){
+        getWindow()->draw(*brick);
+    }
     getWindow()->display();
 }
