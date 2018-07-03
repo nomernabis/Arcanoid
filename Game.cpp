@@ -30,13 +30,12 @@ void Game::run() {
     float elapsedTime = 0;
     const float TIME_PER_FRAME = 1.f / 60;
     while(window.isOpen()){
-        handleInput();
-        std::cout << elapsedTime << ", " << TIME_PER_FRAME << "\n";
         if(elapsedTime > TIME_PER_FRAME){
-            elapsedTime = 0;
+            elapsedTime -= TIME_PER_FRAME;
+            handleInput();
             update();
+            draw();
         }
-        draw();
         elapsedTime += clock.restart().asSeconds();
     }
 }

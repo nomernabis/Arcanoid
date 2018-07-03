@@ -13,7 +13,7 @@
 class Ball: public sf::Drawable {
     const float WIDTH = 30;
     const float HEIGHT = 30;
-    float dx = 1, dy = -1;
+    float dx = 5, dy = -5;
     sf::RectangleShape rect;
     sf::RenderWindow* window;
 public:
