@@ -10,6 +10,7 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "Paddle.h"
+#include "Brick.h"
 
 class Ball: public sf::Drawable {
     const float WIDTH = 15;
@@ -20,7 +21,7 @@ class Ball: public sf::Drawable {
 public:
     Ball(sf::RenderWindow* window);
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-    void update(const Paddle& paddle);
+    void update(const Paddle& paddle, std::vector<Brick*>& bricks);
     bool isXInBounds(float x);
     bool isYInBounds(float y);
 };

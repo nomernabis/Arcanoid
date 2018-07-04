@@ -16,7 +16,7 @@ void Ball::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     target.draw(rect, states);
 }
 
-void Ball::update(const Paddle& paddle) {
+void Ball::update(const Paddle& paddle, std::vector<Brick*>& bricks) {
     float toX = rect.getPosition().x + dx;
     float toY = rect.getPosition().y + dy;
 
@@ -29,6 +29,16 @@ void Ball::update(const Paddle& paddle) {
     }
     if(!isYInBounds(toY) || paddle.getRect().getGlobalBounds().intersects(toBounds)){
         dy = -dy;
+    }
+
+    for(int i=0; i < bricks.size(); ++i){
+        Brick* brick = bricks.at(i);
+        if(brick->intersects(toBounds)){
+            dy = -dy;
+            bricks.erase(bricks.begin() + i);
+            delete brick;
+            break;
+        }
     }
 
     rect.move(dx, dy);

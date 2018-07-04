@@ -12,6 +12,10 @@ Brick::Brick(sf::RenderWindow* window, float x, float y): window(window) {
     rect.setSize({100, 50});
 }
 
+bool Brick::intersects(sf::FloatRect& bounds) {
+    return rect.getGlobalBounds().intersects(bounds);
+}
+
 void Brick::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     target.draw(rect, states);
 }

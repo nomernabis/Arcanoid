@@ -16,6 +16,7 @@ class Brick: public sf::Drawable{
 public:
     Brick(sf::RenderWindow* window, float x, float y);
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+    bool intersects(sf::FloatRect& bounds);
 };
 
 
