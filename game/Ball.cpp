@@ -38,7 +38,8 @@ void Ball::update(const Paddle& paddle, std::vector<Brick*>& bricks) {
             if(dx != -speed){
                 dx = -speed;
             } else {
-                rect.setPosition(paddle.getRect().getPosition().x - rect.getSize().x, rect.getPosition().y);
+                rect.setPosition(paddle.getRect().getPosition().x - rect.getSize().x,
+                                 rect.getPosition().y);
             }
         } else {
             if(dx != speed){
@@ -54,14 +55,22 @@ void Ball::update(const Paddle& paddle, std::vector<Brick*>& bricks) {
             dy = -dy;
         }
     }
-
+    toBounds.top -= dy;
     for(int i=0; i < bricks.size(); ++i){
         Brick* brick = bricks.at(i);
         if(brick->intersects(toBounds)){
-            dy = -dy;
+            dx = -dx;
             bricks.erase(bricks.begin() + i);
             delete brick;
             break;
+        } else {
+            toBounds.top += dy;
+            if(brick->intersects(toBounds)){
+                dy = -dy;
+                bricks.erase(bricks.begin() + i);
+                delete brick;
+                break;
+            }
         }
     }
 
