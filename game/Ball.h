@@ -15,7 +15,8 @@
 class Ball: public sf::Drawable {
     const float WIDTH = 15;
     const float HEIGHT = 15;
-    float dx = 5, dy = -5;
+    float speed = 5;
+    float dx = speed, dy = -speed;
     sf::RectangleShape rect;
     sf::RenderWindow* window;
 public:
