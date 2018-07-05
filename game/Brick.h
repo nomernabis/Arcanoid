@@ -11,6 +11,8 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 
 class Brick: public sf::Drawable{
+    const float WIDTH = 90;
+    const float HEIGHT = 20;
     sf::RenderWindow* window;
     sf::RectangleShape rect;
 public:

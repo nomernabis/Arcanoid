@@ -4,12 +4,12 @@
 
 #include "GameState.h"
 
-GameState::GameState(Game* game): State(game), paddle(game->getWindow()),
-                                  ball(game->getWindow()) {
-   for(int i=0; i < 6; ++i){
-       Brick* brick = new Brick(getWindow(), i * 100, 10);
-       bricks.push_back(brick);
-   }
+GameState::GameState(Game *game) : State(game), paddle(game->getWindow()),
+                                   ball(game->getWindow()) {
+    for (int i = 0; i < 6; ++i) {
+        Brick *brick = new Brick(getWindow(), 5 + i * 100, 10);
+        bricks.push_back(brick);
+    }
 }
 
 void GameState::handleInput(sf::Event &event) {
@@ -25,7 +25,7 @@ void GameState::draw() {
     getWindow()->clear(sf::Color::White);
     getWindow()->draw(paddle);
     getWindow()->draw(ball);
-    for(Brick* brick:bricks){
+    for (Brick *brick:bricks) {
         getWindow()->draw(*brick);
     }
     getWindow()->display();

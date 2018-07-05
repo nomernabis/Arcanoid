@@ -7,9 +7,9 @@
 Brick::Brick(sf::RenderWindow* window, float x, float y): window(window) {
     rect.setPosition(x, y);
     rect.setFillColor(sf::Color::Red);
-    rect.setOutlineThickness(5);
+    rect.setOutlineThickness(1);
     rect.setOutlineColor(sf::Color::Black);
-    rect.setSize({100, 50});
+    rect.setSize({WIDTH, HEIGHT});
 }
 
 bool Brick::intersects(sf::FloatRect& bounds) {
