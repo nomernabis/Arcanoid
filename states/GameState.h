@@ -7,6 +7,7 @@
 
 
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <ui/elements/TextNode.h>
 #include "State.h"
 #include "../game/Paddle.h"
 #include "../game/Ball.h"
@@ -16,11 +17,16 @@ class GameState : public State{
     Paddle paddle;
     Ball ball;
     std::vector<Brick*> bricks;
+    bool is_paused = true;
+    TextNode textNode;
+    sf::RectangleShape filterRect;
 public:
     GameState(Game* game);
     virtual void handleInput(sf::Event& event);
     virtual void update();
     virtual void draw();
+
+    void handlePause(sf::Event& event);
 };
 
 

@@ -10,7 +10,7 @@ Paddle::Paddle(sf::RenderWindow *window) {
     this->window = window;
     rect.setSize({WIDTH, HEIGHT});
     rect.setFillColor(sf::Color::Red);
-    rect.setPosition(0, window->getSize().y - rect.getSize().y - 10);
+    rect.setPosition(window->getSize().x / 2 - rect.getSize().x / 2, window->getSize().y - rect.getSize().y - 10);
 }
 
 sf::RectangleShape Paddle::getRect() const {
@@ -33,6 +33,14 @@ void Paddle::handleInput(sf::Event &event) {
     if (event.type == sf::Event::KeyReleased) {
         dx = 0;
     }
+}
+
+sf::Vector2f Paddle::getPosition() {
+    return rect.getPosition();
+}
+
+sf::Vector2f Paddle::getSize() {
+    return rect.getSize();
 }
 
 void Paddle::update() {

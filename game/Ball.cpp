@@ -9,10 +9,29 @@ Ball::Ball(sf::RenderWindow *window) {
     this->window = window;
     rect.setFillColor(sf::Color::Red);
     rect.setSize({WIDTH, HEIGHT});
-    rect.setPosition(window->getSize().x / 2 - rect.getSize().x ,
-                     window->getSize().y / 2 - rect.getSize().y);
 }
 
+void Ball::start() {
+    dx = speed;
+    dy = -speed;
+}
+
+void Ball::stop() {
+    dx = 0;
+    dy = 0;
+}
+
+void Ball::setPosition(float x, float y) {
+    rect.setPosition(x, y);
+}
+
+sf::Vector2f Ball::getPosition() {
+    return rect.getPosition();
+}
+
+sf::Vector2f Ball::getSize() {
+    return rect.getSize();
+}
 void Ball::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     target.draw(rect, states);
 }
