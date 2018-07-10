@@ -12,6 +12,7 @@
 #include "Brick.h"
 #include "Paddle.h"
 
+class GameState;
 
 class Ball : public sf::Drawable {
     const float WIDTH = 15;
@@ -20,7 +21,7 @@ class Ball : public sf::Drawable {
     float dx = 0, dy = 0;
     sf::RectangleShape rect;
     sf::RenderWindow *window;
-
+    bool is_fixed;
 public:
     Ball(sf::RenderWindow *window);
 
@@ -30,7 +31,7 @@ public:
 
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
-    void update(const Paddle &paddle, std::vector<Brick *> &bricks);
+    void update(const Paddle &paddle, std::vector<Brick *> &bricks, GameState* gameState);
 
     bool isXInBounds(float x);
 
@@ -41,6 +42,14 @@ public:
     sf::Vector2f getPosition();
 
     sf::Vector2f getSize();
+
+    float getWidth();
+
+    float getHeight();
+
+    bool isFixed();
+
+    void setFixed(bool val);
 };
 
 

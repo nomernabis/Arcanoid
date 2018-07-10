@@ -7,12 +7,14 @@
 GameState::GameState(Game *game) : State(game), paddle(game->getWindow()),
                                    ball(game->getWindow()) {
 
-    for(int i = 0; i < 6; ++i) {
+    for (int i = 0; i < 6; ++i) {
         Brick *brick = new Brick(getWindow(), 5 + i * 100, 10);
         bricks.push_back(brick);
     }
     ball.setPosition(paddle.getPosition().x + paddle.getSize().x / 2 - ball.getSize().x / 2,
-        paddle.getPosition().y - ball.getSize().y);
+                     paddle.getPosition().y - ball.getSize().y);
+    ball.stop();
+    ball.setFixed(true);
 
     sf::Color filterColor = sf::Color::Black;
     //50% opacity
@@ -22,14 +24,21 @@ GameState::GameState(Game *game) : State(game), paddle(game->getWindow()),
     filterRect.setFillColor(sf::Color::Black);
     filterRect.setFillColor(filterColor);
 
-
     textNode.setText("PRESS SPACE TO START");
     textNode.setWindow(getWindow());
     textNode.setCenterInParent(true);
 }
 
+void GameState::groundTouched() {
+    paddle.stop();
+    ball.stop();
+    ball.setPosition(paddle.getPosition().x + paddle.getSize().x / 2 - ball.getSize().x / 2,
+                     paddle.getPosition().y - ball.getSize().y);
+    ball.setFixed(true);
+}
+
 void GameState::handleInput(sf::Event &event) {
-    if(is_paused){
+    if (is_paused) {
         handlePause(event);
     } else {
         paddle.handleInput(event);
@@ -37,27 +46,28 @@ void GameState::handleInput(sf::Event &event) {
 }
 
 void GameState::handlePause(sf::Event &event) {
-    if(event.type == sf::Event::KeyPressed){
-        if(event.key.code == sf::Keyboard::Space){
+    if (event.type == sf::Event::KeyPressed) {
+        if (event.key.code == sf::Keyboard::Space) {
             is_paused = false;
+            ball.setFixed(false);
             ball.start();
         }
     }
 }
 
 void GameState::update() {
-    paddle.update();
-    ball.update(paddle, bricks);
+    paddle.update(&ball);
+    ball.update(paddle, bricks, this);
 }
 
 void GameState::draw() {
     getWindow()->clear(sf::Color::White);
     getWindow()->draw(paddle);
     getWindow()->draw(ball);
-    for (Brick* brick:bricks) {
+    for (Brick *brick:bricks) {
         getWindow()->draw(*brick);
     }
-    if(is_paused){
+    if (is_paused) {
         getWindow()->draw(filterRect);
         getWindow()->draw(textNode);
     }

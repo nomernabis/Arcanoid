@@ -20,13 +20,14 @@ class GameState : public State{
     bool is_paused = true;
     TextNode textNode;
     sf::RectangleShape filterRect;
+    void handlePause(sf::Event& event);
 public:
     GameState(Game* game);
     virtual void handleInput(sf::Event& event);
     virtual void update();
     virtual void draw();
 
-    void handlePause(sf::Event& event);
+    void groundTouched();
 };
 
 
