@@ -18,8 +18,14 @@ class GameState : public State{
     Ball ball;
     std::vector<Brick*> bricks;
     bool is_paused = true;
+    bool is_running = false;
     TextNode textNode;
+    TextNode scoresTextNode;
+    TextNode levelTextNode;
+    int scores = 0;
     sf::RectangleShape filterRect;
+    const int marginTop = 20;
+    std::string scoresStr = "SCORES ";
     void handlePause(sf::Event& event);
 public:
     GameState(Game* game);
@@ -27,6 +33,7 @@ public:
     virtual void update();
     virtual void draw();
 
+    void addScores();
     void groundTouched();
 };
 

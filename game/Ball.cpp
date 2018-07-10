@@ -108,6 +108,7 @@ void Ball::update(const Paddle &paddle, std::vector<Brick *> &bricks, GameState*
             dx = -dx;
             bricks.erase(bricks.begin() + i);
             delete brick;
+            gameState->addScores();
             break;
         } else {
             toBounds.top += dy;
@@ -115,6 +116,7 @@ void Ball::update(const Paddle &paddle, std::vector<Brick *> &bricks, GameState*
                 dy = -dy;
                 bricks.erase(bricks.begin() + i);
                 delete brick;
+                gameState->addScores();
                 break;
             }
         }
