@@ -22,6 +22,7 @@ class Ball : public sf::Drawable {
     sf::RectangleShape rect;
     sf::RenderWindow *window;
     bool is_fixed;
+
 public:
     Ball(sf::RenderWindow *window);
 

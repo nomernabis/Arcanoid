@@ -8,7 +8,7 @@
 
 Ball::Ball(sf::RenderWindow *window) {
     this->window = window;
-    rect.setFillColor(sf::Color::Red);
+    rect.setFillColor(sf::Color::White);
     rect.setSize({WIDTH, HEIGHT});
 }
 

@@ -27,12 +27,14 @@ GameState::GameState(Game *game) : State(game), paddle(game->getWindow()),
 
     scoresTextNode.setText(scoresStr + std::to_string(scores));
     scoresTextNode.setWindow(getWindow());
+    scoresTextNode.setTextColor(sf::Color::White);
     scoresTextNode.setPosition(5, 0);
     scoresTextNode.setFontSize(24);
 
 
     livesTextNode.setText(livesStr + std::to_string(lives));
     livesTextNode.setWindow(getWindow());
+    livesTextNode.setTextColor(sf::Color::White);
     livesTextNode.setPosition(scoresTextNode.getPosition().x + scoresTextNode.getWidth() + 25,
                               scoresTextNode.getPosition().y);
     livesTextNode.setFontSize(24);
@@ -108,7 +110,7 @@ void GameState::addScores() {
 }
 
 void GameState::draw() {
-    getWindow()->clear(sf::Color::White);
+    getWindow()->clear(sf::Color::Black);
     getWindow()->draw(paddle);
     getWindow()->draw(ball);
     getWindow()->draw(scoresTextNode);

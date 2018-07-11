@@ -10,7 +10,7 @@
 Paddle::Paddle(sf::RenderWindow *window) {
     this->window = window;
     rect.setSize({WIDTH, HEIGHT});
-    rect.setFillColor(sf::Color::Red);
+    rect.setFillColor(sf::Color::White);
     rect.setPosition(window->getSize().x / 2 - rect.getSize().x / 2, window->getSize().y - rect.getSize().y - 10);
 }
 
