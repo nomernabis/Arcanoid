@@ -17,24 +17,31 @@ class GameState : public State{
     Paddle paddle;
     Ball ball;
     std::vector<Brick*> bricks;
-    bool is_paused = true;
     bool is_running = false;
-    TextNode textNode;
+    TextNode infoTextNode;
     TextNode scoresTextNode;
     TextNode levelTextNode;
+    TextNode livesTextNode;
     int scores = 0;
+    int lives = 1;
+    bool is_lose = false;
+    bool is_win = false;
     sf::RectangleShape filterRect;
     const int marginTop = 20;
     std::string scoresStr = "SCORES ";
+    std::string livesStr = "LIVES ";
     void handlePause(sf::Event& event);
 public:
     GameState(Game* game);
+    ~GameState();
+
     virtual void handleInput(sf::Event& event);
     virtual void update();
     virtual void draw();
 
     void addScores();
     void groundTouched();
+    void restart();
 };
 
 
