@@ -2,6 +2,7 @@
 // Created by pavel_cpp on 01.07.18.
 //
 
+#include <iostream>
 #include "GameState.h"
 
 GameState::GameState(Game *game) : State(game), paddle(game->getWindow()),
@@ -91,9 +92,12 @@ void GameState::update() {
     if(is_running){
         paddle.update(&ball);
         ball.update(paddle, bricks, this);
+        std::cout << bricks.size() << "\n";
         if(bricks.empty()){
             is_win = true;
+            is_running = false;
             infoTextNode.setText("YOU WIN!");
+            infoTextNode.setCenterInParent(true);
         }
     }
 }

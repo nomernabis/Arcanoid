@@ -31,7 +31,7 @@ public:
 
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
-    void update(const Paddle &paddle, std::vector<Brick *> &bricks, GameState* gameState);
+    void update(const Paddle &paddle, std::vector<Brick*> &bricks, GameState* gameState);
 
     bool isXInBounds(float x);
 
