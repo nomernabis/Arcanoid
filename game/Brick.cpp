@@ -17,3 +17,11 @@ bool Brick::intersects(sf::FloatRect& bounds) {
 void Brick::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     target.draw(rect, states);
 }
+
+float Brick::getHeight() {
+    return rect.getSize().y;
+}
+
+float Brick::getWidth() {
+    return rect.getSize().x;
+}

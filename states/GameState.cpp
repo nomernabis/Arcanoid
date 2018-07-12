@@ -39,9 +39,17 @@ GameState::GameState(Game *game) : State(game), paddle(game->getWindow()),
                               scoresTextNode.getPosition().y);
     livesTextNode.setFontSize(24);
 
-    for (int i = 0; i < 6; ++i) {
-        Brick *brick = new Brick(getWindow(), 50 + i * 100, 20 + scoresTextNode.getPosition().y + scoresTextNode.getHeight());
-        bricks.push_back(brick);
+    initBricks();
+}
+
+void GameState::initBricks() {
+
+
+    for (int i = 0; i < BRICK_ROWS; ++i) {
+        for(int j=0; j < BRICK_COLS; ++j){
+            Brick *brick = new Brick(getWindow(), 50 + j * (Brick::WIDTH + 10), 20 + scoresTextNode.getPosition().y + scoresTextNode.getHeight() + i* (Brick::HEIGHT + 10) + 20);
+            bricks.push_back(brick);
+        }
     }
 }
 
@@ -74,7 +82,7 @@ void GameState::handleInput(sf::Event& event) {
     } else {
         paddle.handleInput(event);
     }
-}
+ }
 
 void GameState::handlePause(sf::Event &event) {
     if (event.type == sf::Event::KeyPressed) {
@@ -136,10 +144,7 @@ void GameState::restart() {
     }
     bricks.clear();
 
-    for (int i = 0; i < 6; ++i) {
-        Brick *brick = new Brick(getWindow(), 5 + i * 100, 20 + scoresTextNode.getPosition().y + scoresTextNode.getHeight());
-        bricks.push_back(brick);
-    }
+    initBricks();
     scores = 0;
     lives = 3;
     is_win = false;

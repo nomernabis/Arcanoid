@@ -31,6 +31,10 @@ class GameState : public State{
     std::string scoresStr = "SCORES ";
     std::string livesStr = "LIVES ";
     void handlePause(sf::Event& event);
+    void initBricks();
+
+    const int BRICK_COLS = 6;
+    const int BRICK_ROWS = 3;
 public:
     GameState(Game* game);
     ~GameState();

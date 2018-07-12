@@ -11,14 +11,16 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 
 class Brick: public sf::Drawable{
-    const float WIDTH = 90;
-    const float HEIGHT = 20;
     sf::RenderWindow* window;
     sf::RectangleShape rect;
 public:
+    static constexpr float WIDTH = 90;
+    static constexpr float HEIGHT = 20;
     Brick(sf::RenderWindow* window, float x, float y);
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
     bool intersects(sf::FloatRect& bounds);
+    float getWidth();
+    float getHeight();
 };
 
 
