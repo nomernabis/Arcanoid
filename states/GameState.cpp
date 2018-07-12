@@ -40,10 +40,11 @@ GameState::GameState(Game *game) : State(game), paddle(game->getWindow()),
     livesTextNode.setFontSize(24);
 
     for (int i = 0; i < 6; ++i) {
-        Brick *brick = new Brick(getWindow(), 5 + i * 100, 20 + scoresTextNode.getPosition().y + scoresTextNode.getHeight());
+        Brick *brick = new Brick(getWindow(), 50 + i * 100, 20 + scoresTextNode.getPosition().y + scoresTextNode.getHeight());
         bricks.push_back(brick);
     }
 }
+
 GameState::~GameState() {
     for(Brick* brick:bricks){
         delete brick;

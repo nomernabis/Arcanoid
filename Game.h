@@ -10,7 +10,7 @@
 class State;
 
 class Game {
-    const int SCREEN_WIDTH = 600;
+    const int SCREEN_WIDTH = 700;
     const int SCREEN_HEGIHT = 600;
     sf::RenderWindow window;
     State* curState = nullptr;
