@@ -26,6 +26,7 @@ class GameState : public State{
     int lives = 1;
     bool is_lose = false;
     bool is_win = false;
+    bool is_paused = false;
     sf::RectangleShape filterRect;
     const int marginTop = 20;
     std::string scoresStr = "SCORES ";

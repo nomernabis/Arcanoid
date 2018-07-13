@@ -80,6 +80,15 @@ void GameState::handleInput(sf::Event& event) {
     if (!is_running) {
         handlePause(event);
     } else {
+        if(event.type == sf::Event::KeyPressed){
+            if(event.key.code == sf::Keyboard::P){
+                is_running = false;
+                is_paused = true;
+                infoTextNode.setText("PAUSE");
+                infoTextNode.setCenterInParent(true);
+                return;
+            }
+        }
         paddle.handleInput(event);
     }
  }
@@ -89,11 +98,19 @@ void GameState::handlePause(sf::Event &event) {
         if (event.key.code == sf::Keyboard::Space) {
             if(!is_running){
                 is_running = true;
-                ball.setFixed(false);
-                ball.start();
+                if(!is_paused){
+                    ball.setFixed(false);
+                    ball.start();
+                }
                 if(is_lose || is_win){
                     restart();
                 }
+            }
+        }
+        if(event.key.code == sf::Keyboard::P){
+            if(is_paused){
+                is_paused = false;
+                is_running = true;
             }
         }
     }
