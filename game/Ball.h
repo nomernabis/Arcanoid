@@ -61,6 +61,8 @@ public:
     float getY();
 
     void checkCollisionWithBricks(std::vector<Brick*>& bricks, GameState* gameState);
+
+    void deleteBrick();
 };
 
 

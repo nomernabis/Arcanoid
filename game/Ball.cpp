@@ -54,30 +54,30 @@ void Ball::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     target.draw(rect, states);
 }
 
-bool Ball::checkPaddleCollisionX(const Paddle& paddle) {
+bool Ball::checkPaddleCollisionX(const Paddle &paddle) {
     sf::FloatRect toBounds = rect.getGlobalBounds();
     toBounds.left += dx;
 
-    if(toBounds.intersects(paddle.getRect().getGlobalBounds())){
+    if (toBounds.intersects(paddle.getRect().getGlobalBounds())) {
         return true;
     }
     return false;
 }
 
-bool Ball::checkPaddleCollisionY(const Paddle& paddle) {
+bool Ball::checkPaddleCollisionY(const Paddle &paddle) {
 
     sf::FloatRect toBounds = rect.getGlobalBounds();
     toBounds.top += dy;
 
-    if(toBounds.intersects(paddle.getRect().getGlobalBounds())){
+    if (toBounds.intersects(paddle.getRect().getGlobalBounds())) {
         return true;
     }
     return false;
 }
 
 
-void Ball::update(const Paddle &paddle, std::vector<Brick *> &bricks, GameState* gameState) {
-    if(is_fixed){
+void Ball::update(const Paddle &paddle, std::vector<Brick *> &bricks, GameState *gameState) {
+    if (is_fixed) {
         return;
     }
 
@@ -98,23 +98,22 @@ void Ball::update(const Paddle &paddle, std::vector<Brick *> &bricks, GameState*
     }
 
 
-
-    if(checkPaddleCollisionX(paddle)){
-        if(getX() < paddle.getX()){
-            if(dx != -speed){
+    if (checkPaddleCollisionX(paddle)) {
+        if (getX() < paddle.getX()) {
+            if (dx != -speed) {
                 dx = -speed;
             } else {
                 //pushing ball to left side
                 rect.setPosition(paddle.getX() - getWidth(), getY());
             }
         } else {
-            if(dx != speed){
+            if (dx != speed) {
                 dx = speed;
             } else {
                 rect.setPosition(paddle.right(), getY());
             }
         }
-    } else if(checkPaddleCollisionY(paddle)){
+    } else if (checkPaddleCollisionY(paddle)) {
         dy = -dy;
     }
 
@@ -123,27 +122,37 @@ void Ball::update(const Paddle &paddle, std::vector<Brick *> &bricks, GameState*
     rect.move(dx, dy);
 }
 
-void Ball::checkCollisionWithBricks(std::vector<Brick*>& bricks, GameState* gameState) {
+
+
+void Ball::checkCollisionWithBricks(std::vector<Brick *> &bricks, GameState *gameState) {
     sf::FloatRect toBounds = rect.getGlobalBounds();
     toBounds.left += dx;
+    bool isOk = false;
     for (int i = 0; i < bricks.size(); ++i) {
         Brick *brick = bricks.at(i);
         if (brick->intersects(toBounds)) {
-            dx = -dx;
-            stop();
-            rect.setFillColor(sf::Color::Red);
-            /*  bricks.erase(bricks.begin() + i);
-              delete brick;*/
-            gameState->addScores();
-
-        } else {
-            toBounds.top += dy;
-            if (brick->intersects(toBounds)) {
-                dy = -dy;
-                bricks.erase(bricks.begin() + i);
-                delete brick;
-                gameState->addScores();
+            if(!isOk){
+                dx = -dx;
             }
+            isOk = true;
+            bricks.erase(bricks.begin() + i);
+            delete brick;
+            gameState->addScores();
+        }
+    }
+    toBounds = rect.getGlobalBounds();
+    toBounds.top += dy;
+    isOk = false;
+    for (int i = 0; i < bricks.size(); ++i) {
+        Brick *brick = bricks.at(i);
+        if (brick->intersects(toBounds)) {
+            if(!isOk){
+                dy = -dy;
+            }
+            isOk = true;
+            bricks.erase(bricks.begin() + i);
+            delete brick;
+            gameState->addScores();
         }
     }
 }
