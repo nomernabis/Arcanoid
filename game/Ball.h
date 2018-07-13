@@ -38,6 +38,10 @@ public:
 
     bool isYInBounds(float y);
 
+    bool checkPaddleCollisionX(const Paddle& paddle);
+
+    bool checkPaddleCollisionY(const Paddle& paddle);
+
     void setPosition(float x, float y);
 
     sf::Vector2f getPosition();
@@ -51,6 +55,12 @@ public:
     bool isFixed();
 
     void setFixed(bool val);
+
+    float getX();
+
+    float getY();
+
+    void checkCollisionWithBricks(std::vector<Brick*>& bricks, GameState* gameState);
 };
 
 

@@ -54,6 +54,28 @@ void Ball::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     target.draw(rect, states);
 }
 
+bool Ball::checkPaddleCollisionX(const Paddle& paddle) {
+    sf::FloatRect toBounds = rect.getGlobalBounds();
+    toBounds.left += dx;
+
+    if(toBounds.intersects(paddle.getRect().getGlobalBounds())){
+        return true;
+    }
+    return false;
+}
+
+bool Ball::checkPaddleCollisionY(const Paddle& paddle) {
+
+    sf::FloatRect toBounds = rect.getGlobalBounds();
+    toBounds.top += dy;
+
+    if(toBounds.intersects(paddle.getRect().getGlobalBounds())){
+        return true;
+    }
+    return false;
+}
+
+
 void Ball::update(const Paddle &paddle, std::vector<Brick *> &bricks, GameState* gameState) {
     if(is_fixed){
         return;
@@ -75,41 +97,45 @@ void Ball::update(const Paddle &paddle, std::vector<Brick *> &bricks, GameState*
         }
     }
 
-    sf::FloatRect toBounds = rect.getGlobalBounds();
-    toBounds.left = toX;
 
-    if (paddle.getRect().getGlobalBounds().intersects(toBounds)) {
-        //check is from sides
-        if (toBounds.left < paddle.getRect().getPosition().x + paddle.getRect().getSize().x / 2) {
-            if (dx != -speed) {
+
+    if(checkPaddleCollisionX(paddle)){
+        if(getX() < paddle.getX()){
+            if(dx != -speed){
                 dx = -speed;
             } else {
-                rect.setPosition(paddle.getRect().getPosition().x - rect.getSize().x,
-                                 rect.getPosition().y);
+                //pushing ball to left side
+                rect.setPosition(paddle.getX() - getWidth(), getY());
             }
         } else {
-            if (dx != speed) {
+            if(dx != speed){
                 dx = speed;
             } else {
-                rect.setPosition(paddle.getRect().getPosition().x + paddle.getRect().getSize().x,
-                                 rect.getPosition().y);
+                rect.setPosition(paddle.right(), getY());
             }
         }
-    } else {
-        toBounds.top = toY;
-        if (paddle.getRect().getGlobalBounds().intersects(toBounds)) {
-            dy = -dy;
-        }
+    } else if(checkPaddleCollisionY(paddle)){
+        dy = -dy;
     }
-    toBounds.top -= dy;
+
+
+    checkCollisionWithBricks(bricks, gameState);
+    rect.move(dx, dy);
+}
+
+void Ball::checkCollisionWithBricks(std::vector<Brick*>& bricks, GameState* gameState) {
+    sf::FloatRect toBounds = rect.getGlobalBounds();
+    toBounds.left += dx;
     for (int i = 0; i < bricks.size(); ++i) {
         Brick *brick = bricks.at(i);
         if (brick->intersects(toBounds)) {
             dx = -dx;
-            bricks.erase(bricks.begin() + i);
-            delete brick;
+            stop();
+            rect.setFillColor(sf::Color::Red);
+            /*  bricks.erase(bricks.begin() + i);
+              delete brick;*/
             gameState->addScores();
-            break;
+
         } else {
             toBounds.top += dy;
             if (brick->intersects(toBounds)) {
@@ -117,12 +143,17 @@ void Ball::update(const Paddle &paddle, std::vector<Brick *> &bricks, GameState*
                 bricks.erase(bricks.begin() + i);
                 delete brick;
                 gameState->addScores();
-                break;
             }
         }
     }
+}
 
-    rect.move(dx, dy);
+float Ball::getX() {
+    return rect.getPosition().x;
+}
+
+float Ball::getY() {
+    return rect.getPosition().y;
 }
 
 bool Ball::isXInBounds(float x) {

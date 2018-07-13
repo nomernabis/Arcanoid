@@ -14,6 +14,11 @@ Paddle::Paddle(sf::RenderWindow *window) {
     rect.setPosition(window->getSize().x / 2 - rect.getSize().x / 2, window->getSize().y - rect.getSize().y - 10);
 }
 
+
+float Paddle::right() const{
+    return getX() + getWidth();
+}
+
 sf::RectangleShape Paddle::getRect() const {
     return rect;
 }
@@ -57,20 +62,20 @@ float Paddle::getCenter() {
     return rect.getPosition().x + rect.getSize().x / 2;
 }
 
-float Paddle::getX() {
-    return getPosition().x;
+float Paddle::getX() const {
+    return rect.getPosition().x;
 }
 
-float Paddle::getY() {
-    return getPosition().y;
+float Paddle::getY() const {
+    return rect.getPosition().y;
 }
 
-float Paddle::getWidth() {
-    return getSize().x;
+float Paddle::getWidth() const{
+    return rect.getSize().x;
 }
 
-float Paddle::getHeight() {
-    return getSize().y;
+float Paddle::getHeight() const{
+    return rect.getSize().y;
 }
 
 void Paddle::update(Ball* ball) {

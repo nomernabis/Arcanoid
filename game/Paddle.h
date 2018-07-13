@@ -36,15 +36,17 @@ public:
 
     sf::Vector2f getSize();
 
-    float getX();
+    float getX() const;
 
-    float getY();
+    float getY() const;
 
-    float getWidth();
+    float getWidth() const;
 
-    float getHeight();
+    float getHeight() const;
 
     void stop();
+
+    float right() const;
 };
 
 
